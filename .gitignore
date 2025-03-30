@@ -1,0 +1,9 @@
+/.idea
+/Architecture.Api/bin
+/Architecture.Api/obj
+/Architecture.Application/bin
+/Architecture.Application/obj
+/Architecture.Domain/bin
+/Architecture.Domain/obj
+/Architecture.Infrastructure/bin
+/Architecture.Infrastructure/obj
