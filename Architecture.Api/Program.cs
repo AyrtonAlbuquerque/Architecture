@@ -24,6 +24,7 @@ namespace Architecture.Api
             builder.Services.AddMemoryCache();
             builder.Services.AddHttpContextAccessor();
             builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddRouting();
             builder.Services.AddAuthorization();
             builder.Services.AddExceptionHandler<ExceptionHandler>();
             builder.Services.AddProblemDetails();
@@ -92,17 +93,17 @@ namespace Architecture.Api
 
             var app = builder.Build();
 
-            app.UseCors();
-            app.MapOpenApi();
             app.UseSwagger();
             app.UseSwaggerUI();
             app.UseExceptionHandler();
-            app.MapEndpoints();
             app.UseRouting();
+            app.UseCors();
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseSerilogRequestLogging();
+            app.MapOpenApi();
+            app.MapEndpoints();
             app.Run();
         }
     }
