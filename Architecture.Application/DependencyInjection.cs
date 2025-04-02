@@ -1,6 +1,8 @@
+using Architecture.Application.Options;
 using Architecture.Application.Services.Auth;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Scrutor;
 
 namespace Architecture.Application
@@ -16,6 +18,11 @@ namespace Architecture.Application
                 .UsingRegistrationStrategy(RegistrationStrategy.Skip)
                 .AsImplementedInterfaces()
                 .WithScopedLifetime());
+            services.AddOptions<Settings>()
+                .BindConfiguration(Settings.Section)
+                .ValidateDataAnnotations()
+                .ValidateOnStart();
+            services.AddSingleton(x => x.GetRequiredService<IOptions<Settings>>().Value);
 
             return services;
         }

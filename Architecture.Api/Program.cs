@@ -16,9 +16,15 @@ namespace Architecture.Api
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            var secret = builder.Configuration["AppSettings:Secret"];
+            var secret = builder.Configuration["AppSettings:Jwt:Secret"];
+            var issuer = builder.Configuration["AppSettings:Jwt:Issuer"];
+            var audience = builder.Configuration["AppSettings:Jwt:Audience"];
+            var environment = builder.Configuration["AppSettings:Environment"];
 
             ArgumentException.ThrowIfNullOrEmpty(secret);
+            ArgumentException.ThrowIfNullOrEmpty(issuer);
+            ArgumentException.ThrowIfNullOrEmpty(audience);
+
 
             builder.Services.AddOpenApi();
             builder.Services.AddMemoryCache();
@@ -45,7 +51,7 @@ namespace Architecture.Api
                 options.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Title = "Architecture API",
-                    Version = $"1.0 {builder.Configuration["AppSettings:Environment"]}",
+                    Version = $"1.0 {environment}",
                     Description = "Rest API",
                     Contact = new OpenApiContact
                     {
@@ -85,8 +91,8 @@ namespace Architecture.Api
                     ValidateAudience = true,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
-                    ValidIssuer = "Architecture",
-                    ValidAudience = "Architecture",
+                    ValidIssuer = issuer,
+                    ValidAudience = audience,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret))
                 };
             });
