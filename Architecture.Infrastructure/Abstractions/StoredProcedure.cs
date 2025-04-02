@@ -10,7 +10,7 @@ namespace Architecture.Infrastructure.Abstractions
     {
         private readonly List<SqlParameter> parameters = new List<SqlParameter>();
 
-        public IStoredProcedure<T> Parameter(string name, object? value, SqlDbType? type = null, int? size = null, byte? precision = null, byte? scale = null, ParameterDirection direction = ParameterDirection.Input)
+        public IStoredProcedure<T> SetParameter(string name, object? value, SqlDbType? type = null, int? size = null, byte? precision = null, byte? scale = null, ParameterDirection direction = ParameterDirection.Input)
         {
             var parameter = new SqlParameter();
 

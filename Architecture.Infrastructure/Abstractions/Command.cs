@@ -17,7 +17,7 @@ namespace Architecture.Infrastructure.Abstractions
             command.CommandType = CommandType.Text;
         }
 
-        public ICommand Parameter(string name, object? value)
+        public ICommand SetParameter(string name, object? value)
         {
             var parameter = command.CreateParameter();
 
@@ -25,7 +25,23 @@ namespace Architecture.Infrastructure.Abstractions
             parameter.Value = value;
 
             if (command.CommandType == CommandType.Text && command.CommandText.Contains(parameter.ParameterName))
-                command.CommandText = command.CommandText.Replace(name, value?.ToString());
+                command.CommandText = command.CommandText.Replace
+                (
+                    name.Replace("]", "]]")
+                        .Replace("'", "''")
+                        .Replace("--", string.Empty)
+                        .Replace("/*", string.Empty)
+                        .Replace("*/", string.Empty)
+                        .Replace(";", string.Empty),
+                    value.ToString()
+                        .Replace("]", "]]")
+                        .Replace("'", "''")
+                        .Replace("--", string.Empty)
+                        .Replace("/*", string.Empty)
+                        .Replace("*/", string.Empty)
+                        .Replace(";", string.Empty)
+                );
+
 
             command.Parameters.Add(parameter);
 

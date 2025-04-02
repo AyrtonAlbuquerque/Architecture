@@ -25,76 +25,68 @@ namespace Architecture.Api
             ArgumentException.ThrowIfNullOrEmpty(issuer);
             ArgumentException.ThrowIfNullOrEmpty(audience);
 
-
-            builder.Services.AddOpenApi();
-            builder.Services.AddMemoryCache();
-            builder.Services.AddHttpContextAccessor();
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddRouting();
-            builder.Services.AddAuthorization();
-            builder.Services.AddExceptionHandler<ExceptionHandler>();
-            builder.Services.AddProblemDetails();
-            builder.Services.AddEndpoints();
             builder.Services
+                .AddOpenApi()
+                .AddMemoryCache()
+                .AddHttpContextAccessor()
+                .AddEndpointsApiExplorer()
+                .AddRouting()
+                .AddAuthorization()
+                .AddExceptionHandler<ExceptionHandler>()
+                .AddProblemDetails()
+                .AddEndpoints()
                 .AddApplication()
-                .AddInfrastructure(builder.Configuration);
+                .AddInfrastructure(builder.Configuration)
+                .AddCors(options =>
+                {
+                    options.AddDefaultPolicy(policy =>
+                    {
+                        policy.AllowAnyMethod();
+                        policy.AllowAnyHeader();
+                        policy.AllowAnyOrigin();
+                    });
+                })
+                .AddSwaggerGen(options =>
+                {
+                    options.SwaggerDoc("v1", new OpenApiInfo
+                    {
+                        Title = "Architecture API",
+                        Version = $"1.0 {environment}",
+                        Description = "Rest API",
+                        Contact = new OpenApiContact
+                        {
+                            Name = "Ayrton Albuquerque",
+                            Email = "ayrton_ito@hotmail.com"
+                        }
+                    });
+                    options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                    {
+                        Description = "JWT Authorization Bearer Token.",
+                        In = ParameterLocation.Header,
+                        Name = "Authorization",
+                        Type = SecuritySchemeType.Http,
+                        Scheme = JwtBearerDefaults.AuthenticationScheme
+                    });
+                    options.OperationFilter<SecurityRequirementsOperationFilter>();
+                    options.CustomSchemaIds(type => type.ToString());
+                })
+                .AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = issuer,
+                        ValidAudience = audience,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret))
+                    };
+                });
 
-            // Add Logging
             builder.Host.UseSerilog((context, configuration) =>
             {
                 configuration.ReadFrom.Configuration(context.Configuration);
-            });
-
-            // Add Swagger
-            builder.Services.AddSwaggerGen(options =>
-            {
-                options.SwaggerDoc("v1", new OpenApiInfo
-                {
-                    Title = "Architecture API",
-                    Version = $"1.0 {environment}",
-                    Description = "Rest API",
-                    Contact = new OpenApiContact
-                    {
-                        Name = "Ayrton Albuquerque",
-                        Email = "ayrton_ito@hotmail.com"
-                    }
-                });
-                options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
-                {
-                    Description = "JWT Authorization Bearer Token.",
-                    In = ParameterLocation.Header,
-                    Name = "Authorization",
-                    Type = SecuritySchemeType.Http,
-                    Scheme = JwtBearerDefaults.AuthenticationScheme
-                });
-                options.OperationFilter<SecurityRequirementsOperationFilter>();
-                options.CustomSchemaIds(type => type.ToString());
-            });
-
-            // Add Cors
-            builder.Services.AddCors(options =>
-            {
-                options.AddDefaultPolicy(policy =>
-                {
-                    policy.AllowAnyMethod();
-                    policy.AllowAnyHeader();
-                    policy.AllowAnyOrigin();
-                });
-            });
-
-            // Add Authentication
-            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
-                    ValidIssuer = issuer,
-                    ValidAudience = audience,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret))
-                };
             });
 
             var app = builder.Build();

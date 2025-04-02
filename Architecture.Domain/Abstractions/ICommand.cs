@@ -5,7 +5,7 @@ namespace Architecture.Domain.Abstractions
 {
     public interface ICommand
     {
-        ICommand Parameter(string name, object? value);
+        ICommand SetParameter(string name, object? value);
         ICommand Type(CommandType type);
         ICommand Text(string text);
         ICommand Timeout(int timeout);
