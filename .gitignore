@@ -10,3 +10,4 @@
 /logs
 /Architecture.Api/logs
 /*.user
+/.vscode

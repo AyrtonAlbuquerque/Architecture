@@ -91,15 +91,15 @@ namespace Architecture.Api
 
             var app = builder.Build();
 
-            app.UseSwagger();
-            app.UseSwaggerUI();
             app.UseExceptionHandler();
+            app.UseHttpsRedirection();
             app.UseRouting();
             app.UseCors();
-            app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseSerilogRequestLogging();
+            app.UseSwagger();
+            app.UseSwaggerUI();
             app.MapOpenApi();
             app.MapEndpoints();
             app.Run();
