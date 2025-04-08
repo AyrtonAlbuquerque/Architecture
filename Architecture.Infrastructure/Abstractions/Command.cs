@@ -42,7 +42,6 @@ namespace Architecture.Infrastructure.Abstractions
                         .Replace(";", string.Empty)
                 );
 
-
             command.Parameters.Add(parameter);
 
             return this;
