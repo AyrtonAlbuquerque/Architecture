@@ -5,7 +5,6 @@ using Architecture.Api.Domain.Interfaces;
 using Architecture.Api.Extensions;
 using Architecture.Api.Infrastructure;
 using FluentValidation;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
