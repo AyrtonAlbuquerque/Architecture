@@ -10,16 +10,9 @@ namespace Architecture.Application.Services.Auth
     {
         public async Task<Result<Token>> Login(Login login)
         {
-            try
-            {
-                await userRepository.SelectAsync();
+            await userRepository.SelectAsync();
 
-                return Result.Ok(new Token(login, settings));
-            }
-            catch (Exception e)
-            {
-                return Result.Fail(new Error("Login Error").CausedBy((e.InnerException ?? e).Message));
-            }
+            return Result.Ok(new Token(login, settings));
         }
     }
 }
