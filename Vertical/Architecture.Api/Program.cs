@@ -68,14 +68,7 @@ namespace Architecture.Api
                     });
                     options.CustomSchemaIds(type =>
                     {
-                        var name = type.FullName ?? type.Name;
-
-                        if (type.IsNested && type.DeclaringType != null)
-                        {
-                            return $"{type.DeclaringType.Name}.{type.Name}";
-                        }
-
-                        return type.Name;
+                        return type.IsNested && type.DeclaringType != null ? $"{type.DeclaringType.Name}.{type.Name}" : type.Name;
                     });
                     options.OperationFilter<SecurityRequirementsOperationFilter>();
                 })
