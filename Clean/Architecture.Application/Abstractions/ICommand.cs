@@ -1,7 +1,7 @@
 using FluentResults;
 using MediatR;
 
-namespace Architecture.Application.Interfaces
+namespace Architecture.Application.Abstractions
 {
     public interface ICommand : IRequest<Result>;
 

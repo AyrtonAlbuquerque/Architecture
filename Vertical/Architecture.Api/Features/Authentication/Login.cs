@@ -11,7 +11,8 @@ namespace Architecture.Api.Features.Authentication
 {
     public static class Login
     {
-        public record Command(string Email, string Password) : ICommand<Token>;
+        public record Command(string Email, string Password) : ICommand<Response>;
+        public record Response(string Type, string Value);
 
         public sealed class Validator : AbstractValidator<Command>
         {
@@ -39,15 +40,15 @@ namespace Architecture.Api.Features.Authentication
                 })
                 .WithTags("Auth")
                 .WithValidation<Command>()
-                .Produces<Token>()
+                .Produces<Response>()
                 .Produces<ProblemDetails>(StatusCodes.Status400BadRequest)
                 .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError);
             }
         }
 
-        public sealed class Handler(IUserRepository userRepository) : ICommandHandler<Command, Token>
+        public sealed class Handler(IToken token, IUserRepository userRepository) : ICommandHandler<Command, Response>
         {
-            public async Task<Result<Token>> Handle(Command command, CancellationToken cancellationToken)
+            public async Task<Result<Response>> Handle(Command command, CancellationToken cancellationToken)
             {
                 var user = await userRepository.GetByEmailAsync(command.Email);
 
@@ -56,7 +57,7 @@ namespace Architecture.Api.Features.Authentication
                     return Result.Fail("Incorrect email or password");
                 }
 
-                return Result.Ok(new Token(user));
+                return Result.Ok(new Response("Bearer", token.Create(user)));
             }
         }
     }

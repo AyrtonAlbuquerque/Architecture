@@ -1,9 +1,12 @@
 using Architecture.Api.Common;
 using Architecture.Api.Infrastructure.Database;
 using Architecture.Api.Infrastructure.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
 using Scrutor;
+using Swashbuckle.AspNetCore.Filters;
 
 namespace Architecture.Api.Extensions
 {
@@ -26,6 +29,7 @@ namespace Architecture.Api.Extensions
                 .ValidateDataAnnotations()
                 .ValidateOnStart();
             services.AddSingleton(x => x.GetRequiredService<IOptions<Settings>>().Value);
+            services.AddSingleton<IToken, Token>();
 
             return services;
         }

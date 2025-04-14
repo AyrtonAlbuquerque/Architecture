@@ -1,5 +1,4 @@
 using Architecture.Api.Extensions;
-using Architecture.Application.Common;
 using Architecture.Application.Authentication.Login;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -18,7 +17,7 @@ namespace Architecture.Api.Endpoints.Authentication
             })
             .WithTags("Auth")
             .WithValidation<LoginCommand>()
-            .Produces<Token>()
+            .Produces<LoginResponse>()
             .Produces<ProblemDetails>(StatusCodes.Status400BadRequest)
             .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError);
         }

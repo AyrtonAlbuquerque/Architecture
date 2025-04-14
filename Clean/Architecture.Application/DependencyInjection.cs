@@ -19,6 +19,7 @@ namespace Architecture.Application
                 .ValidateDataAnnotations()
                 .ValidateOnStart();
             services.AddSingleton(x => x.GetRequiredService<IOptions<Settings>>().Value);
+            services.AddSingleton<IToken, Token>();
 
             return services;
         }
