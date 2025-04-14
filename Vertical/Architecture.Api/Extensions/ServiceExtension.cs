@@ -1,4 +1,4 @@
-using Architecture.Api.Infrastructure;
+using Architecture.Api.Common;
 using Architecture.Api.Infrastructure.Database;
 using Architecture.Api.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;

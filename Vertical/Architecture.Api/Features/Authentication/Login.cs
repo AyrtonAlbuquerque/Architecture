@@ -1,27 +1,26 @@
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
+using Architecture.Api.Abstractions;
+using Architecture.Api.Common;
 using Architecture.Api.Domain.Interfaces;
 using Architecture.Api.Extensions;
-using Architecture.Api.Infrastructure;
+using FluentResults;
 using FluentValidation;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 
 namespace Architecture.Api.Features.Authentication
 {
     public static class Login
     {
-        public record Request(string Username, string Password);
-        public record Response(string Type, double? Expires, string Value);
+        public record Command(string Email, string Password) : ICommand<Token>;
 
-        public sealed class Validator : AbstractValidator<Request>
+        public sealed class Validator : AbstractValidator<Command>
         {
             public Validator()
             {
-                RuleFor(x => x.Username)
+                RuleFor(x => x.Email)
                     .NotEmpty()
-                    .WithMessage("Username is required");
+                    .EmailAddress()
+                    .WithMessage("Email is required");
                 RuleFor(x => x.Password)
                     .NotEmpty()
                     .WithMessage("Password is required");
@@ -32,34 +31,33 @@ namespace Architecture.Api.Features.Authentication
         {
             public void MapEndpoint(IEndpointRouteBuilder app)
             {
-                app.MapPost("/auth/login", Handler)
-                    .WithTags("Auth")
-                    .WithValidation<Request>()
-                    .Produces<Response>()
-                    .Produces<ProblemDetails>(StatusCodes.Status400BadRequest)
-                    .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError);
+                app.MapPost("/auth/login", async (Command command, ISender sender) =>
+                {
+                    var result = await sender.Send(command);
+
+                    return result.IsSuccess ? Results.Ok(result.Value) : result.Problem();
+                })
+                .WithTags("Auth")
+                .WithValidation<Command>()
+                .Produces<Token>()
+                .Produces<ProblemDetails>(StatusCodes.Status400BadRequest)
+                .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError);
             }
         }
 
-        public static async Task<IResult> Handler(Request request, Settings settings, IUserRepository userRepository)
+        public sealed class Handler(IUserRepository userRepository) : ICommandHandler<Command, Token>
         {
-            await userRepository.SelectAsync();
+            public async Task<Result<Token>> Handle(Command command, CancellationToken cancellationToken)
+            {
+                var user = await userRepository.GetByEmailAsync(command.Email);
 
-            return Results.Ok(new Response
-            (
-                "Bearer",
-                TimeSpan.FromHours(settings.Jwt.Expiration).TotalMilliseconds,
-                new JwtSecurityTokenHandler().WriteToken(new JwtSecurityToken(
-                    issuer: settings.Jwt.Issuer,
-                    audience: settings.Jwt.Audience,
-                    claims: new List<Claim>
-                    {
-                        new Claim(JwtRegisteredClaimNames.Sub, request.Username),
-                    },
-                    expires: DateTime.Now.AddHours(settings.Jwt.Expiration),
-                    signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(settings.Jwt.Secret)), SecurityAlgorithms.HmacSha256Signature)
-                ))
-            ));
+                if (user is null || !Hasher.Verify(command.Password, user.Password))
+                {
+                    return Result.Fail("Incorrect email or password");
+                }
+
+                return Result.Ok(new Token(user));
+            }
         }
     }
 }

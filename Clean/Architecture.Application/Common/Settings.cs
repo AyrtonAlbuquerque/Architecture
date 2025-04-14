@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Architecture.Api.Infrastructure
+namespace Architecture.Application.Common
 {
     public sealed class Settings
     {

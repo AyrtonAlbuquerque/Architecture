@@ -36,6 +36,10 @@ namespace Architecture.Api
                 .AddProblemDetails()
                 .AddEndpoints()
                 .AddInfrastructure(builder.Configuration)
+                .AddMediatR(options =>
+                {
+                    options.RegisterServicesFromAssembly(typeof(Program).Assembly);
+                })
                 .AddCors(options =>
                 {
                     options.AddDefaultPolicy(policy =>

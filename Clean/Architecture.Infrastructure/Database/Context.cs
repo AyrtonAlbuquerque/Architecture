@@ -1,5 +1,5 @@
 using Architecture.Domain.Maps;
-using Architecture.Domain.Models;
+using Architecture.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Architecture.Infrastructure.Database

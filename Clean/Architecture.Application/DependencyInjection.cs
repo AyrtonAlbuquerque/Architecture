@@ -1,9 +1,7 @@
-using Architecture.Application.Options;
-using Architecture.Application.Services.Auth;
+using Architecture.Application.Common;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using Scrutor;
 
 namespace Architecture.Application
 {
@@ -12,12 +10,10 @@ namespace Architecture.Application
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
             services.AddValidatorsFromAssembly(typeof(DependencyInjection).Assembly);
-            services.Scan(scan => scan
-                .FromAssemblyOf<AuthService>()
-                .AddClasses(classes => classes.InNamespaces("Architecture.Application"))
-                .UsingRegistrationStrategy(RegistrationStrategy.Skip)
-                .AsImplementedInterfaces()
-                .WithScopedLifetime());
+            services.AddMediatR(config =>
+            {
+                config.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly);
+            });
             services.AddOptions<Settings>()
                 .BindConfiguration(Settings.Section)
                 .ValidateDataAnnotations()

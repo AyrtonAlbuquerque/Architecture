@@ -12,8 +12,9 @@ namespace Architecture.Api.Domain.Maps
             builder.HasKey(x => x.Id);
 
             // Properties
-            builder.Property(x => x.Id);
-            builder.Property(x => x.Name)
+            builder.HasIndex(x => x.Email)
+                .IsUnique();
+            builder.Property(x => x.Password)
                 .IsRequired()
                 .HasMaxLength(100);
         }
