@@ -2,9 +2,9 @@ using FluentValidation;
 
 namespace Architecture.Application.Authentication.Login
 {
-    public class LoginValidator : AbstractValidator<LoginCommand>
+    public class Validator : AbstractValidator<Command>
     {
-        public LoginValidator()
+        public Validator()
         {
             RuleFor(x => x.Email)
                 .NotEmpty()

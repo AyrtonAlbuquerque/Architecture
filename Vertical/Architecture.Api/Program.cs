@@ -35,6 +35,7 @@ namespace Architecture.Api
                 .AddValidatorsFromAssembly(typeof(Program).Assembly)
                 .AddProblemDetails()
                 .AddEndpoints()
+                .AddMappings()
                 .AddInfrastructure(builder.Configuration)
                 .AddMediatR(options =>
                 {
@@ -72,7 +73,10 @@ namespace Architecture.Api
                     });
                     options.CustomSchemaIds(type =>
                     {
-                        return type.IsNested && type.DeclaringType != null ? $"{type.DeclaringType.Name}.{type.Name}" : type.Name;
+                        return (type.IsNested && type.DeclaringType != null ? 
+                            $"{type.DeclaringType.Name}.{type.Name}" : 
+                            type.Name)
+                            .Replace("Command", "Request");
                     });
                     options.OperationFilter<SecurityRequirementsOperationFilter>();
                 })

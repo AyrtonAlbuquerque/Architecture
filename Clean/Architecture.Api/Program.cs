@@ -35,6 +35,7 @@ namespace Architecture.Api
                 .AddExceptionHandler<ExceptionHandler>()
                 .AddProblemDetails()
                 .AddEndpoints()
+                .AddMappings()
                 .AddApplication()
                 .AddInfrastructure(builder.Configuration)
                 .AddCors(options =>
@@ -69,7 +70,9 @@ namespace Architecture.Api
                     });
                     options.CustomSchemaIds(type =>
                     {
-                        return type.IsNested && type.DeclaringType != null ? $"{type.DeclaringType.Name}.{type.Name}" : type.Name;
+                        return string
+                            .Join('.', type.FullName?.Split('.').TakeLast(2) ?? new[] { type.Name })
+                            .Replace("Command", "Request");
                     });
                     options.OperationFilter<SecurityRequirementsOperationFilter>();
                 })
