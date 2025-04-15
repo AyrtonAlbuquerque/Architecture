@@ -12,11 +12,16 @@ namespace Architecture.Domain.Maps
             builder.HasKey(x => x.Id);
 
             // Properties
-            builder.HasIndex(x => x.Email)
-                .IsUnique();
+            builder.Property(x => x.Email)
+                .IsRequired()
+                .HasMaxLength(100);
             builder.Property(x => x.Password)
                 .IsRequired()
                 .HasMaxLength(100);
+
+            // Indexes
+            builder.HasIndex(x => x.Email)
+                .IsUnique();
         }
     }
 }
