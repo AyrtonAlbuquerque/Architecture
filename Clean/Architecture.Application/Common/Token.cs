@@ -11,7 +11,7 @@ namespace Architecture.Application.Common
         string Create(User user);
     }
 
-    public class Token(Settings settings) :IToken
+    public class Token(Settings settings) : IToken
     {
         public string Create(User user)
         {
