@@ -37,7 +37,7 @@ namespace Architecture.Api.Extensions
         {
             Assembly.GetExecutingAssembly().GetTypes()
                 .Where(x => !x.IsInterface && !x.IsAbstract && typeof(IMapping).IsAssignableFrom(x))
-                .Select(x => (IMapping)Activator.CreateInstance(x)).ToList()
+                .Select(x => (IMapping)Activator.CreateInstance(x)!).ToList()
                 .ForEach(x => x?.AddMapping());
 
             return services;
