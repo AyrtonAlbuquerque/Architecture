@@ -13,8 +13,8 @@ namespace Architecture.Api.Features.Authentication
 {
     public static class Register
     {
-        public record Command(string Email, string Password) : ICommand<Response>;
-        public record Response(string Type, string Value);
+        public sealed record Command(string Email, string Password) : ICommand<Response>;
+        public sealed record Response(string Type, string Value);
 
         public sealed class Validator : AbstractValidator<Command>
         {
