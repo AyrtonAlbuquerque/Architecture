@@ -1,5 +1,6 @@
 using System.Text;
 using Architecture.Api.Extensions;
+using Architecture.Api.Filters;
 using Architecture.Api.Handlers;
 using Architecture.Application;
 using Architecture.Infrastructure;
@@ -74,6 +75,7 @@ namespace Architecture.Api
                             .Join('.', type.FullName?.Split('.').TakeLast(2) ?? new[] { type.Name })
                             .Replace("Command", "Request");
                     });
+                    options.OperationFilter<ProblemDetailsFilter>();
                     options.OperationFilter<SecurityRequirementsOperationFilter>();
                 })
                 .AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>

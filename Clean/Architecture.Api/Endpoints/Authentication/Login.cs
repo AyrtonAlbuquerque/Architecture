@@ -17,9 +17,7 @@ namespace Architecture.Api.Endpoints.Authentication
             })
             .WithTags("Auth")
             .WithValidation<Command>()
-            .Produces<Response>()
-            .Produces<ProblemDetails>(StatusCodes.Status400BadRequest)
-            .Produces<ProblemDetails>(StatusCodes.Status500InternalServerError);
+            .Produces<Response>();
         }
     }
 }

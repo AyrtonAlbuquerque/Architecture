@@ -1,5 +1,6 @@
 using System.Text;
 using Architecture.Api.Extensions;
+using Architecture.Api.Filters;
 using Architecture.Api.Handlers;
 using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -78,6 +79,7 @@ namespace Architecture.Api
                             type.Name)
                             .Replace("Command", "Request");
                     });
+                    options.OperationFilter<ProblemDetailsFilter>();
                     options.OperationFilter<SecurityRequirementsOperationFilter>();
                 })
                 .AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
