@@ -5,7 +5,6 @@ using Architecture.Api.Extensions;
 using FluentResults;
 using FluentValidation;
 using MediatR;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Architecture.Api.Features.Authentication
 {

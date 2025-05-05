@@ -7,7 +7,6 @@ using FluentResults;
 using FluentValidation;
 using Mapster;
 using MediatR;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Architecture.Api.Features.Authentication
 {

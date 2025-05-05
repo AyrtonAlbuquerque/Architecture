@@ -1,7 +1,6 @@
 using Architecture.Api.Extensions;
 using Architecture.Application.Authentication.Register;
 using MediatR;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Architecture.Api.Endpoints.Authentication
 {
