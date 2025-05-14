@@ -5,7 +5,7 @@ using FluentResults;
 
 namespace Architecture.Application.Authentication.Login
 {
-    public class Handler(IToken token, IUserRepository userRepository) : ICommandHandler<Command, Response>
+    public class Handler(IToken token, IUserRepository userRepository) : IHandler<Command, Response>
     {
         public async Task<Result<Response>> Handle(Command command, CancellationToken cancellationToken)
         {

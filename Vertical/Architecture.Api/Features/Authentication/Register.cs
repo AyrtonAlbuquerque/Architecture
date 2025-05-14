@@ -56,7 +56,7 @@ namespace Architecture.Api.Features.Authentication
             }
         }
 
-        public sealed class Handler(IToken token, IUserRepository userRepository) : ICommandHandler<Command, Response>
+        public sealed class Handler(IToken token, IUserRepository userRepository) : IHandler<Command, Response>
         {
             public async Task<Result<Response>> Handle(Command command, CancellationToken cancellationToken)
             {

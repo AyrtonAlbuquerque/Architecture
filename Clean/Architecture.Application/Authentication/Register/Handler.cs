@@ -7,7 +7,7 @@ using Mapster;
 
 namespace Architecture.Application.Authentication.Register
 {
-    public class Handler(IToken token, IUserRepository userRepository) : ICommandHandler<Command, Response>
+    public class Handler(IToken token, IUserRepository userRepository) : IHandler<Command, Response>
     {
         public async Task<Result<Response>> Handle(Command command, CancellationToken cancellationToken)
         {
