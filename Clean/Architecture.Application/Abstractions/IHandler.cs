@@ -3,12 +3,10 @@ using MediatR;
 
 namespace Architecture.Application.Abstractions
 {
-    public interface IBase;
-    public interface IBase<T>;
-    public interface IQuery : IBase, IRequest<Result>;
-    public interface IQuery<T> : IBase<T>, IRequest<Result<T>>;
-    public interface ICommand : IBase, IRequest<Result>;
-    public interface ICommand<T> : IBase<T>, IRequest<Result<T>>;
-    public interface IHandler<TRequest> : IRequestHandler<TRequest, Result> where TRequest : IRequest<Result>, IBase;
-    public interface IHandler<TRequest, TResponse> : IRequestHandler<TRequest, Result<TResponse>> where TRequest : IRequest<Result<TResponse>>, IBase<TResponse>;
+    public interface IQuery : IRequest<Result>;
+    public interface IQuery<T> : IRequest<Result<T>>;
+    public interface ICommand : IRequest<Result>;
+    public interface ICommand<T> : IRequest<Result<T>>;
+    public interface IHandler<TRequest> : IRequestHandler<TRequest, Result> where TRequest : IRequest<Result>;
+    public interface IHandler<TRequest, TResponse> : IRequestHandler<TRequest, Result<TResponse>> where TRequest : IRequest<Result<TResponse>>;
 }

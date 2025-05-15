@@ -15,7 +15,8 @@ namespace Architecture.Api.Extensions
         {
             services.AddDbContext<Context>(options => options
                 .UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
-                .UseLazyLoadingProxies());
+                .UseLazyLoadingProxies()
+                .EnableSensitiveDataLogging());
             services.Scan(scan => scan
                 .FromAssemblyOf<UserRepository>()
                 .AddClasses(classes => classes.InNamespaces("Architecture.Api.Infrastructure.Repositories")

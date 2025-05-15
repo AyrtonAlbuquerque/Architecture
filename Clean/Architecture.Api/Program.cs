@@ -71,9 +71,9 @@ namespace Architecture.Api
                     });
                     options.CustomSchemaIds(type =>
                     {
-                        return string
-                            .Join('.', type.FullName?.Split('.').TakeLast(2) ?? new[] { type.Name })
-                            .Replace("Command", "Request");
+                        return string.Join('.', type.FullName?.Split('.').TakeLast(2) ?? new[] { type.Name })
+                            .Replace("Command", "Request")
+                            .Replace("Query", "Request");
                     });
                     options.OperationFilter<ProblemDetailsFilter>();
                     options.OperationFilter<SecurityRequirementsOperationFilter>();

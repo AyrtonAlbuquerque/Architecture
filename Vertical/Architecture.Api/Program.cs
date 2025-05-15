@@ -74,10 +74,11 @@ namespace Architecture.Api
                     });
                     options.CustomSchemaIds(type =>
                     {
-                        return (type.IsNested && type.DeclaringType != null ? 
-                            $"{type.DeclaringType.Name}.{type.Name}" : 
+                        return (type.IsNested && type.DeclaringType != null ?
+                            $"{type.DeclaringType.Name}.{type.Name}" :
                             type.Name)
-                            .Replace("Command", "Request");
+                            .Replace("Command", "Request")
+                            .Replace("Query", "Request");
                     });
                     options.OperationFilter<ProblemDetailsFilter>();
                     options.OperationFilter<SecurityRequirementsOperationFilter>();
