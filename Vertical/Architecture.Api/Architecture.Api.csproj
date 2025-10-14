@@ -26,7 +26,7 @@
         <PackageReference Include="Scrutor.AspNetCore" Version="3.3.0" />
         <PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.6" />
-        <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="9.0.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="9.0.1" />
     </ItemGroup>
 
 </Project>
