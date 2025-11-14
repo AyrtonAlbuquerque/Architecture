@@ -6,7 +6,7 @@ using Architecture.Application;
 using Architecture.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 using Serilog;
 using Swashbuckle.AspNetCore.Filters;
 

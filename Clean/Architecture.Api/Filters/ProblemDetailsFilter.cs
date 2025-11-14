@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Architecture.Api.Filters
@@ -16,7 +16,7 @@ namespace Architecture.Api.Filters
                     operation.Responses[statusCode.ToString()] = new OpenApiResponse
                     {
                         Description = ReasonPhrases.GetReasonPhrase(statusCode),
-                        Content =
+                        Content = new Dictionary<string, OpenApiMediaType>()
                         {
                             ["application/json"] = new OpenApiMediaType
                             {
