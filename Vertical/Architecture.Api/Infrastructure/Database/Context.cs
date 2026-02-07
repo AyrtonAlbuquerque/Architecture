@@ -1,5 +1,5 @@
-using Architecture.Api.Domain.Entities;
-using Architecture.Api.Domain.Maps;
+using Architecture.Api.Domain.Models;
+using Architecture.Api.Infrastructure.Maps;
 using Microsoft.EntityFrameworkCore;
 
 namespace Architecture.Api.Infrastructure.Database

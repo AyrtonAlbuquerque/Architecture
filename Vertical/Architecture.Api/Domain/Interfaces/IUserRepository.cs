@@ -1,4 +1,4 @@
-using Architecture.Api.Domain.Entities;
+using Architecture.Api.Domain.Models;
 
 namespace Architecture.Api.Domain.Interfaces
 {

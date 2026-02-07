@@ -1,6 +1,6 @@
 using Architecture.Application.Abstractions;
 using Architecture.Application.Common;
-using Architecture.Domain.Entities;
+using Architecture.Domain.Models;
 using Mapster;
 
 namespace Architecture.Application.Authentication.Register

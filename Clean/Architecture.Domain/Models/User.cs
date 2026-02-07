@@ -1,4 +1,4 @@
-namespace Architecture.Domain.Entities
+namespace Architecture.Domain.Models
 {
     public class User
     {

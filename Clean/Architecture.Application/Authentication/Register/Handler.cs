@@ -1,6 +1,6 @@
 using Architecture.Application.Abstractions;
 using Architecture.Application.Common;
-using Architecture.Domain.Entities;
+using Architecture.Domain.Models;
 using Architecture.Domain.Interfaces;
 using FluentResults;
 using Mapster;

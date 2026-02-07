@@ -1,6 +1,6 @@
 using Architecture.Api.Abstractions;
 using Architecture.Api.Common;
-using Architecture.Api.Domain.Entities;
+using Architecture.Api.Domain.Models;
 using Architecture.Api.Domain.Interfaces;
 using Architecture.Api.Extensions;
 using FluentResults;

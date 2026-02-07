@@ -1,7 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Architecture.Api.Domain.Entities;
+using Architecture.Api.Domain.Models;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Architecture.Api.Common

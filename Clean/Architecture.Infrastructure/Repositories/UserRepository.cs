@@ -1,5 +1,5 @@
 using Architecture.Domain.Interfaces;
-using Architecture.Domain.Entities;
+using Architecture.Domain.Models;
 using Architecture.Infrastructure.Database;
 
 namespace Architecture.Infrastructure.Repositories

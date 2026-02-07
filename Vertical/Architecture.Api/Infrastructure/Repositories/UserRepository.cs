@@ -1,4 +1,4 @@
-using Architecture.Api.Domain.Entities;
+using Architecture.Api.Domain.Models;
 using Architecture.Api.Domain.Interfaces;
 using Architecture.Api.Infrastructure.Database;
 

@@ -1,4 +1,4 @@
-using Architecture.Domain.Entities;
+using Architecture.Domain.Models;
 
 namespace Architecture.Domain.Interfaces
 {

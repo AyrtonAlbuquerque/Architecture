@@ -10,10 +10,10 @@ namespace Architecture.Application.Common
         public string Environment { get; set; }
 
         [Required]
-        public JwtSettings Jwt { get; set; }
+        public Jwt Jwt { get; set; }
     }
 
-    public sealed class JwtSettings
+    public sealed class Jwt
     {
         public const string Section = "AppSettings:Jwt";
 

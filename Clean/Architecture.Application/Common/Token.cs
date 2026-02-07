@@ -1,7 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Architecture.Domain.Entities;
+using Architecture.Domain.Models;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Architecture.Application.Common
