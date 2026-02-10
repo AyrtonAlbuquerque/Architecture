@@ -1,13 +1,9 @@
 using System.Reflection;
+using Architecture.Api.Abstractions;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Architecture.Api.Extensions
 {
-    public interface IEndpoint
-    {
-        void MapEndpoint(IEndpointRouteBuilder app);
-    }
-
     public static class EndpointExtension
     {
         public static IServiceCollection AddEndpoints(this IServiceCollection services)

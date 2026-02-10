@@ -38,10 +38,7 @@ namespace Architecture.Api
                 .AddEndpoints()
                 .AddMappings()
                 .AddInfrastructure(builder.Configuration)
-                .AddMediatR(options =>
-                {
-                    options.RegisterServicesFromAssembly(typeof(Program).Assembly);
-                })
+                .AddMediatR(options => { options.RegisterServicesFromAssembly(typeof(Program).Assembly); })
                 .AddCors(options =>
                 {
                     options.AddDefaultPolicy(policy =>
@@ -74,9 +71,7 @@ namespace Architecture.Api
                     });
                     options.CustomSchemaIds(type =>
                     {
-                        return (type.IsNested && type.DeclaringType != null ?
-                            $"{type.DeclaringType.Name}.{type.Name}" :
-                            type.Name)
+                        return (type.IsNested && type.DeclaringType != null ? $"{type.DeclaringType.Name}.{type.Name}" : type.Name)
                             .Replace("Command", "Request")
                             .Replace("Query", "Request");
                     });
