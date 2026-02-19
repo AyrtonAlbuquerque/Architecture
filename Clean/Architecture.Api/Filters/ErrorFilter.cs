@@ -5,7 +5,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Architecture.Api.Filters
 {
-    public class ProblemDetailsFilter : IOperationFilter
+    public class ErrorFilter : IOperationFilter
     {
         public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {

@@ -1,34 +1,26 @@
-using FluentResults;
+using Architecture.Api.Domain.Results;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Architecture.Api.Extensions
 {
     public static class ResultExtension
     {
-        public static IResult Problem(this Result result)
+        public static IResult ToResult(this Result result)
         {
-            return result.IsFailed ? Results.Problem(new ProblemDetails
+            return result.IsSuccess ? Results.Ok() : Results.Json(new ProblemDetails
             {
-                Title = "Bad Request",
-                Status = StatusCodes.Status400BadRequest,
-                Extensions = new Dictionary<string, object?>
-                {
-                    { "errors", new[] { result.Errors } }
-                }
-            }) : throw new InvalidOperationException("It is not possible to convert a successful result into a problem");
+                Status = (int)result.StatusCode,
+                Detail = result.Message
+            }, statusCode: (int)result.StatusCode);
         }
 
-        public static IResult Problem<T>(this Result<T> result)
+        public static IResult ToResult<T>(this Result<T> result)
         {
-            return result.IsFailed ? Results.Problem(new ProblemDetails
+            return result.IsSuccess ? Results.Ok(result.Value) : Results.Json(new ProblemDetails
             {
-                Title = "Bad Request",
-                Status = StatusCodes.Status400BadRequest,
-                Extensions = new Dictionary<string, object?>
-                {
-                    { "errors", new[] { result.Errors } }
-                }
-            }) : throw new InvalidOperationException("It is not possible to convert a successful result into a problem");
+                Status = (int)result.StatusCode,
+                Detail = result.Message
+            }, statusCode: (int)result.StatusCode);
         }
     }
 }

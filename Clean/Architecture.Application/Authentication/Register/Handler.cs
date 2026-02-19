@@ -2,7 +2,7 @@ using Architecture.Application.Abstractions;
 using Architecture.Application.Common;
 using Architecture.Domain.Models;
 using Architecture.Domain.Interfaces;
-using FluentResults;
+using Architecture.Domain.Results;
 using Mapster;
 
 namespace Architecture.Application.Authentication.Register
@@ -15,12 +15,12 @@ namespace Architecture.Application.Authentication.Register
 
             if (await userRepository.ExistsAsync(command.Email))
             {
-                return Result.Fail("User with this email already exists");
+                return Result.BadRequest<Response>("User with this email already exists");
             }
 
             await userRepository.SaveAsync();
 
-            return Result.Ok(new Response("Bearer", token.Create(user)));
+            return Result.Success(new Response("Bearer", token.Create(user)));
         }
     }
 }

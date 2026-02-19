@@ -1,10 +1,12 @@
 using System.Text;
+using System.Text.Json.Serialization;
 using Architecture.Api.Extensions;
 using Architecture.Api.Filters;
 using Architecture.Api.Handlers;
 using Architecture.Application;
 using Architecture.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http.Json;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
 using Serilog;
@@ -38,6 +40,7 @@ namespace Architecture.Api
                 .AddEndpoints()
                 .AddMappings()
                 .AddApplication()
+                .AddJobs()
                 .AddInfrastructure(builder.Configuration)
                 .AddCors(options =>
                 {
@@ -75,8 +78,12 @@ namespace Architecture.Api
                             .Replace("Command", "Request")
                             .Replace("Query", "Request");
                     });
-                    options.OperationFilter<ProblemDetailsFilter>();
+                    options.OperationFilter<ErrorFilter>();
                     options.OperationFilter<SecurityRequirementsOperationFilter>();
+                })
+                .Configure<JsonOptions>(options =>
+                {
+                    options.SerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
                 })
                 .AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
                 {
@@ -92,6 +99,15 @@ namespace Architecture.Api
                     };
                 });
 
+            if (OperatingSystem.IsWindows())
+            {
+                builder.Logging.AddEventLog(options =>
+                {
+                    options.SourceName = "Clean";
+                    options.LogName = "Application";
+                });
+            }
+
             builder.Host.UseSerilog((context, configuration) =>
             {
                 configuration.ReadFrom.Configuration(context.Configuration);
@@ -103,11 +119,13 @@ namespace Architecture.Api
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseCors();
+            app.UseJobs();
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseSerilogRequestLogging();
             app.UseSwagger();
             app.UseSwaggerUI();
+            app.UseHangfire();
             app.MapOpenApi();
             app.MapEndpoints();
             app.Run();

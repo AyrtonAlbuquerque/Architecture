@@ -1,11 +1,10 @@
 using System.Data;
 using System.Data.Common;
 using Architecture.Api.Domain.Interfaces;
-using Architecture.Api.Infrastructure.Database;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
-namespace Architecture.Api.Infrastructure.Repositories
+namespace Architecture.Api.Infrastructure.Database.Repositories
 {
     public class Command : ICommand
     {

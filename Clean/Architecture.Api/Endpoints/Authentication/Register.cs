@@ -10,9 +10,7 @@ namespace Architecture.Api.Endpoints.Authentication
         {
             app.MapPost("/auth/register", async (Command command, ISender sender) =>
             {
-                var result = await sender.Send(command);
-
-                return result.IsSuccess ? Results.Ok(result.Value) : result.Problem();
+                return (await sender.Send(command)).ToResult();
             })
             .WithTags("Auth")
             .WithValidation<Command>()

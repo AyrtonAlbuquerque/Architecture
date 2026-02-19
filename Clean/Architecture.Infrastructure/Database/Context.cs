@@ -1,4 +1,4 @@
-using Architecture.Infrastructure.Maps;
+using Architecture.Infrastructure.Database.Maps;
 using Architecture.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 

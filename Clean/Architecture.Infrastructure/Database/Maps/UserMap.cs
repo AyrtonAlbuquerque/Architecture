@@ -2,7 +2,7 @@ using Architecture.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Architecture.Infrastructure.Maps
+namespace Architecture.Infrastructure.Database.Maps
 {
     public class UserMap : IEntityTypeConfiguration<User>
     {

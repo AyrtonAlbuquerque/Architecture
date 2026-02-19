@@ -11,6 +11,12 @@ namespace Architecture.Application.Common
 
         [Required]
         public Jwt Jwt { get; set; }
+
+        [Required]
+        public Mail Mail { get; set; }
+
+        [Required]
+        public SMS SMS { get; set; }
     }
 
     public sealed class Jwt
@@ -28,5 +34,45 @@ namespace Architecture.Application.Common
 
         [Required]
         public double Expiration { get; set; }
+    }
+
+    public sealed class Mail
+    {
+        public const string Section = "AppSettings:Mail";
+
+        [Required]
+        public string Email { get; set; }
+
+        [Required]
+        public string Name { get; set; }
+
+        [Required]
+        public string User { get; set; }
+
+        [Required]
+        public string Password { get; set; }
+
+        [Required]
+        public string Smtp { get; set; }
+
+        [Required]
+        public int Port { get; set; }
+    }
+
+    public sealed class SMS
+    {
+        public const string Section = "AppSettings:SMS";
+
+        [Required]
+        public string Server { get; set; }
+
+        [Required]
+        public string Endpoint { get; set; }
+
+        [Required]
+        public string Secret { get; set; }
+
+        [Required]
+        public string Carteira { get; set; }
     }
 }

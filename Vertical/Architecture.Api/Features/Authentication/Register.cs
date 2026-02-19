@@ -2,8 +2,8 @@ using Architecture.Api.Abstractions;
 using Architecture.Api.Common;
 using Architecture.Api.Domain.Models;
 using Architecture.Api.Domain.Interfaces;
+using Architecture.Api.Domain.Results;
 using Architecture.Api.Extensions;
-using FluentResults;
 using FluentValidation;
 using Mapster;
 using MediatR;
@@ -46,9 +46,7 @@ namespace Architecture.Api.Features.Authentication
             {
                 app.MapPost("/auth/register", async (Command command, ISender sender) =>
                 {
-                    var result = await sender.Send(command);
-
-                    return result.IsSuccess ? Results.Ok(result.Value) : result.Problem();
+                    return (await sender.Send(command)).ToResult();
                 })
                 .WithTags("Auth")
                 .WithValidation<Command>()
@@ -64,12 +62,12 @@ namespace Architecture.Api.Features.Authentication
 
                 if (await userRepository.ExistsAsync(command.Email))
                 {
-                    return Result.Fail("User with this email already exists");
+                    return Result.BadRequest<Response>("User with this email already exists");
                 }
 
                 await userRepository.SaveAsync();
 
-                return Result.Ok(new Response("Bearer", token.Create(user)));
+                return Result.Success(new Response("Bearer", token.Create(user)));
             }
         }
     }

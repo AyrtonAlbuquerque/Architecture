@@ -1,8 +1,7 @@
-using Architecture.Domain.Interfaces;
-using Architecture.Domain.Models;
-using Architecture.Infrastructure.Database;
+using Architecture.Api.Domain.Models;
+using Architecture.Api.Domain.Interfaces;
 
-namespace Architecture.Infrastructure.Repositories
+namespace Architecture.Api.Infrastructure.Database.Repositories
 {
     public class UserRepository(Context context) : Repository<User>(context), IUserRepository
     {

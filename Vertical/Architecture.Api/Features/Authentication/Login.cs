@@ -1,8 +1,8 @@
 using Architecture.Api.Abstractions;
 using Architecture.Api.Common;
 using Architecture.Api.Domain.Interfaces;
+using Architecture.Api.Domain.Results;
 using Architecture.Api.Extensions;
-using FluentResults;
 using FluentValidation;
 using MediatR;
 
@@ -33,9 +33,7 @@ namespace Architecture.Api.Features.Authentication
             {
                 app.MapPost("/auth/login", async (Command command, ISender sender) =>
                 {
-                    var result = await sender.Send(command);
-
-                    return result.IsSuccess ? Results.Ok(result.Value) : result.Problem();
+                    return (await sender.Send(command)).ToResult();
                 })
                 .WithTags("Auth")
                 .WithValidation<Command>()
@@ -51,10 +49,10 @@ namespace Architecture.Api.Features.Authentication
 
                 if (user is null || !Hasher.Verify(command.Password, user.Password))
                 {
-                    return Result.Fail("Incorrect email or password");
+                    return Result.Unauthorized<Response>("Incorrect email or password");
                 }
 
-                return Result.Ok(new Response("Bearer", token.Create(user)));
+                return Result.Success(new Response("Bearer", token.Create(user)));
             }
         }
     }

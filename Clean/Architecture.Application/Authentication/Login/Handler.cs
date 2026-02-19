@@ -1,7 +1,7 @@
 using Architecture.Application.Common;
 using Architecture.Application.Abstractions;
 using Architecture.Domain.Interfaces;
-using FluentResults;
+using Architecture.Domain.Results;
 
 namespace Architecture.Application.Authentication.Login
 {
@@ -13,10 +13,10 @@ namespace Architecture.Application.Authentication.Login
 
             if (user is null || !Hasher.Verify(command.Password, user.Password))
             {
-                return Result.Fail("Incorrect email or password");
+                return Result.Unauthorized<Response>("Incorrect email or password");
             }
 
-            return Result.Ok(new Response("Bearer", token.Create(user)));
+            return Result.Success(new Response("Bearer", token.Create(user)));
         }
     }
 }

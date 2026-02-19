@@ -1,4 +1,4 @@
-using FluentResults;
+using Architecture.Api.Domain.Results;
 using MediatR;
 
 namespace Architecture.Api.Abstractions
