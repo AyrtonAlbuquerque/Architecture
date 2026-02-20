@@ -32,6 +32,12 @@ namespace Architecture.Infrastructure
                 .UsingRegistrationStrategy(RegistrationStrategy.Skip)
                 .AsImplementedInterfaces()
                 .WithScopedLifetime());
+            services.Scan(scan => scan
+                .FromAssemblyOf<LogService>()
+                .AddClasses(classes => classes.InNamespaces("Architecture.Infrastructure.Services"))
+                .UsingRegistrationStrategy(RegistrationStrategy.Skip)
+                .AsImplementedInterfaces()
+                .WithScopedLifetime());
             services.AddTransient<SmtpClient>((serviceProvider) =>
             {
                 return new SmtpClient

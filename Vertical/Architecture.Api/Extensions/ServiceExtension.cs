@@ -31,6 +31,12 @@ namespace Architecture.Api.Extensions
                 .UsingRegistrationStrategy(RegistrationStrategy.Skip)
                 .AsImplementedInterfaces()
                 .WithScopedLifetime());
+            services.Scan(scan => scan
+                .FromAssemblyOf<LogService>()
+                .AddClasses(classes => classes.InNamespaces("Architecture.Api.Infrastructure.Services"))
+                .UsingRegistrationStrategy(RegistrationStrategy.Skip)
+                .AsImplementedInterfaces()
+                .WithScopedLifetime());
             services.AddOptions<Settings>()
                 .BindConfiguration(Settings.Section)
                 .ValidateDataAnnotations()
