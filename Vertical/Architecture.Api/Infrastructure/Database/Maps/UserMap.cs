@@ -8,20 +8,15 @@ namespace Architecture.Api.Infrastructure.Database.Maps
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            // Primary Key
             builder.HasKey(x => x.Id);
-
-            // Properties
             builder.Property(x => x.Email)
-                .IsRequired()
-                .HasMaxLength(100);
+                .HasMaxLength(100)
+                .IsRequired();
             builder.Property(x => x.Password)
-                .IsRequired()
-                .HasMaxLength(100);
+                .HasMaxLength(100)
+                .IsRequired();
 
-            // Indexes
-            builder.HasIndex(x => x.Email)
-                .IsUnique();
+            builder.HasIndex(x => x.Email).IsUnique();
         }
     }
 }

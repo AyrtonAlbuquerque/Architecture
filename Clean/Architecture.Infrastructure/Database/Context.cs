@@ -6,6 +6,7 @@ namespace Architecture.Infrastructure.Database
 {
     public class Context(DbContextOptions options) : DbContext(options)
     {
+        public DbSet<Keys> Keys => Set<Keys>();
         public DbSet<User> User => Set<User>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
