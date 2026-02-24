@@ -40,11 +40,17 @@ namespace Architecture.Domain.Interfaces
         Task<int> ExecuteAsync(FormattableString query);
         IQueryable<T> Query(FormattableString query);
         T Insert(T item);
+        Task<T> InsertAsync(T item);
         IList<T> Insert(IList<T> items);
+        Task<IList<T>> InsertAsync(IList<T> items);
         T Update(T item);
+        Task<T> UpdateAsync(T item);
         IList<T> Update(IList<T> items);
+        Task<IList<T>> UpdateAsync(IList<T> items);
         T Delete(T item);
+        Task<T> DeleteAsync(T item);
         IList<T> Delete(IList<T> items);
+        Task<IList<T>> DeleteAsync(IList<T> items);
         IStoredProcedure<T> StoredProcedure(string procedureName);
         IStoredProcedure<TResult> StoredProcedure<TResult>(string procedureName) where TResult : class;
         ICommand Command(string commandText);

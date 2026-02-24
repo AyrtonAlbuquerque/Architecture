@@ -58,7 +58,7 @@ namespace Architecture.Api.Features.Authentication
         {
             public async Task<Result<Response>> Handle(Command command, CancellationToken cancellationToken)
             {
-                var user = userRepository.Insert(command.Adapt<User>());
+                var user = await userRepository.InsertAsync(command.Adapt<User>());
 
                 if (await userRepository.ExistsAsync(command.Email))
                 {

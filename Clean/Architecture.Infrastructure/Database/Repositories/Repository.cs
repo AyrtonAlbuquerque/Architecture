@@ -314,7 +314,16 @@ namespace Architecture.Infrastructure.Database.Repositories
         {
             ArgumentNullException.ThrowIfNull(item);
 
-            entity.Attach(item);
+            entity.Add(item);
+
+            return item;
+        }
+
+        public async Task<T> InsertAsync(T item)
+        {
+            ArgumentNullException.ThrowIfNull(item);
+
+            await entity.AddAsync(item);
 
             return item;
         }
@@ -325,12 +334,32 @@ namespace Architecture.Infrastructure.Database.Repositories
 
             if (!items.Any()) return Enumerable.Empty<T>().ToList();
 
-            entity.AttachRange(items);
+            entity.AddRange(items);
+
+            return items;
+        }
+
+        public async Task<IList<T>> InsertAsync(IList<T> items)
+        {
+            ArgumentNullException.ThrowIfNull(items);
+
+            if (!items.Any()) return Enumerable.Empty<T>().ToList();
+
+            await entity.AddRangeAsync(items);
 
             return items;
         }
 
         public T Update(T item)
+        {
+            ArgumentNullException.ThrowIfNull(item);
+
+            entity.Update(item);
+
+            return item;
+        }
+
+        public async Task<T> UpdateAsync(T item)
         {
             ArgumentNullException.ThrowIfNull(item);
 
@@ -350,6 +379,17 @@ namespace Architecture.Infrastructure.Database.Repositories
             return items;
         }
 
+        public async Task<IList<T>> UpdateAsync(IList<T> items)
+        {
+            ArgumentNullException.ThrowIfNull(items);
+
+            if (items.Count == 0) return Enumerable.Empty<T>().ToList();
+
+            entity.UpdateRange(items);
+
+            return items;
+        }
+
         public T Delete(T item)
         {
             ArgumentNullException.ThrowIfNull(item);
@@ -359,7 +399,27 @@ namespace Architecture.Infrastructure.Database.Repositories
             return item;
         }
 
+        public async Task<T> DeleteAsync(T item)
+        {
+            ArgumentNullException.ThrowIfNull(item);
+
+            entity.Remove(item);
+
+            return item;
+        }
+
         public IList<T> Delete(IList<T> items)
+        {
+            ArgumentNullException.ThrowIfNull(items);
+
+            if (items.Count == 0) return Enumerable.Empty<T>().ToList();
+
+            entity.RemoveRange(items);
+
+            return items;
+        }
+
+        public async Task<IList<T>> DeleteAsync(IList<T> items)
         {
             ArgumentNullException.ThrowIfNull(items);
 
