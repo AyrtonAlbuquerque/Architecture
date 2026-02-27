@@ -8,6 +8,7 @@ using Architecture.Api.Common;
 using Architecture.Api.Infrastructure.Database;
 using Architecture.Api.Infrastructure.Database.Repositories;
 using Architecture.Api.Infrastructure.Services;
+using Bogus;
 using Hangfire;
 using Hangfire.Common;
 using Microsoft.EntityFrameworkCore;
@@ -41,6 +42,8 @@ namespace Architecture.Api.Extensions
                 .BindConfiguration(Settings.Section)
                 .ValidateDataAnnotations()
                 .ValidateOnStart();
+            services.AddSingleton<Faker>(x => new Faker("pt_BR"));
+            services.AddSingleton<Random>(x => new Random());
             services.AddSingleton(x => x.GetRequiredService<IOptions<Settings>>().Value);
             services.AddSingleton<IToken, Token>();
             services.AddTransient<SmtpClient>((serviceProvider) =>
@@ -113,6 +116,17 @@ namespace Architecture.Api.Extensions
                         manager.AddOrUpdate(type.FullName, job, schedule.Cron);
                     }
                 });
+
+            return app;
+        }
+
+        public static IApplicationBuilder UseBuffering(this IApplicationBuilder app)
+        {
+            app.Use(async (context, next) =>
+            {
+                context.Request.EnableBuffering();
+                await next();
+            });
 
             return app;
         }

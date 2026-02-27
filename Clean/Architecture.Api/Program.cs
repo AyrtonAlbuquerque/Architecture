@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http.Json;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
 using Serilog;
+using Serilog.Events;
 using Swashbuckle.AspNetCore.Filters;
 
 namespace Architecture.Api
@@ -99,19 +100,19 @@ namespace Architecture.Api
                     };
                 });
 
-            if (OperatingSystem.IsWindows())
-            {
-                builder.Logging.AddEventLog(options =>
-                {
-                    options.SourceName = "Clean";
-                    options.LogName = "Application";
-                });
-            }
-
             builder.Host.UseSerilog((context, configuration) =>
             {
                 configuration.ReadFrom.Configuration(context.Configuration);
+
+                if (OperatingSystem.IsWindows())
+                {
+                    configuration.WriteTo.EventLog("Clean",
+                        logName: "Application",
+                        manageEventSource: false,
+                        restrictedToMinimumLevel: LogEventLevel.Warning);
+                }
             });
+
 
             var app = builder.Build();
 

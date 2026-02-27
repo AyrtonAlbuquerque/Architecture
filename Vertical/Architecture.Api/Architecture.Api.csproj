@@ -8,6 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Bogus" Version="35.6.5" />
         <PackageReference Include="EnumerableExtensions" Version="3.0.0" />
         <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
         <PackageReference Include="Hangfire.AspNetCore" Version="1.8.23" />
@@ -29,6 +30,7 @@
         <PackageReference Include="Refit.HttpClientFactory" Version="10.0.1" />
         <PackageReference Include="Scrutor.AspNetCore" Version="3.3.0" />
         <PackageReference Include="Serilog.AspNetCore" Version="10.0.0" />
+        <PackageReference Include="Serilog.Sinks.EventLog" Version="4.0.0" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.4" />
         <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="10.0.1" />
     </ItemGroup>

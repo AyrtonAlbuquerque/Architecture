@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http.Json;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
 using Serilog;
+using Serilog.Events;
 using Swashbuckle.AspNetCore.Filters;
 
 namespace Architecture.Api
@@ -41,7 +42,7 @@ namespace Architecture.Api
                 .AddEndpoints()
                 .AddMappings()
                 .AddInfrastructure(builder.Configuration)
-                .AddMediatR(options => { options.RegisterServicesFromAssembly(typeof(Program).Assembly); })
+                .AddMediatR(options => options.RegisterServicesFromAssembly(typeof(Program).Assembly))
                 .AddJobs()
                 .AddCors(options =>
                 {
@@ -100,18 +101,17 @@ namespace Architecture.Api
                     };
                 });
 
-            if (OperatingSystem.IsWindows())
-            {
-                builder.Logging.AddEventLog(options =>
-                {
-                    options.SourceName = "Vertical";
-                    options.LogName = "Application";
-                });
-            }
-
             builder.Host.UseSerilog((context, configuration) =>
             {
                 configuration.ReadFrom.Configuration(context.Configuration);
+
+                if (OperatingSystem.IsWindows())
+                {
+                    configuration.WriteTo.EventLog("Vertical",
+                        logName: "Application",
+                        manageEventSource: false,
+                        restrictedToMinimumLevel: LogEventLevel.Warning);
+                }
             });
 
             var app = builder.Build();
