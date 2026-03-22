@@ -125,7 +125,7 @@ namespace Architecture.Api
             app.UseAuthorization();
             app.UseSerilogRequestLogging();
             app.UseSwagger();
-            app.UseSwaggerUI();
+            app.UseSwaggerUI(x => x.DefaultModelsExpandDepth(-1));
             app.UseHangfire();
             app.MapOpenApi();
             app.MapEndpoints();
