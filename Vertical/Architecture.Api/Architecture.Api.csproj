@@ -13,7 +13,7 @@
         <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
         <PackageReference Include="Hangfire.AspNetCore" Version="1.8.23" />
         <PackageReference Include="Hangfire.InMemory" Version="1.0.0" />
-        <PackageReference Include="Mapster" Version="10.0.5" />
+        <PackageReference Include="Mapster" Version="10.0.6" />
         <PackageReference Include="MediatR" Version="14.1.0" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.5" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.5" />
@@ -31,7 +31,7 @@
         <PackageReference Include="Scrutor.AspNetCore" Version="3.3.0" />
         <PackageReference Include="Serilog.AspNetCore" Version="10.0.0" />
         <PackageReference Include="Serilog.Sinks.EventLog" Version="4.0.0" />
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.6" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.7" />
         <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="10.0.1" />
     </ItemGroup>
 
