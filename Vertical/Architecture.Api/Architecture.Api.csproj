@@ -25,7 +25,7 @@
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.17.0" />
+        <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.18.0" />
         <PackageReference Include="QuestPDF" Version="2026.2.4" />
         <PackageReference Include="Refit.HttpClientFactory" Version="10.1.6" />
         <PackageReference Include="Scrutor.AspNetCore" Version="3.3.0" />
