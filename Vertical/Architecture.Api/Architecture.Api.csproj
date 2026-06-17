@@ -27,7 +27,7 @@
         </PackageReference>
         <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.19.1" />
         <PackageReference Include="QuestPDF" Version="2026.6.0" />
-        <PackageReference Include="Refit.HttpClientFactory" Version="11.0.1" />
+        <PackageReference Include="Refit.HttpClientFactory" Version="11.1.0" />
         <PackageReference Include="Scrutor.AspNetCore" Version="3.3.0" />
         <PackageReference Include="Serilog.AspNetCore" Version="10.0.0" />
         <PackageReference Include="Serilog.Sinks.EventLog" Version="4.0.0" />
