@@ -26,8 +26,8 @@
       </PackageReference>
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.10" />
       <PackageReference Include="QuestPDF" Version="2026.7.1" />
-      <PackageReference Include="Refit" Version="13.1.0" />
-      <PackageReference Include="Refit.HttpClientFactory" Version="13.1.0" />
+      <PackageReference Include="Refit" Version="14.0.1" />
+      <PackageReference Include="Refit.HttpClientFactory" Version="14.0.1" />
       <PackageReference Include="Scrutor" Version="7.0.0" />
     </ItemGroup>
 
