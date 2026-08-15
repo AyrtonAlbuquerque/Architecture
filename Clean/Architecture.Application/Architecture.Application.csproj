@@ -18,11 +18,11 @@
       <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
       <PackageReference Include="Mapster" Version="10.0.11" />
       <PackageReference Include="MediatR" Version="14.2.0" />
-      <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.3.11" />
-      <PackageReference Include="Microsoft.Extensions.Configuration" Version="10.0.10" />
-      <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.10" />
+      <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.3.12" />
+      <PackageReference Include="Microsoft.Extensions.Configuration" Version="10.0.11" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.11" />
       <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="10.0.10" />
-      <PackageReference Include="Microsoft.Extensions.Options.DataAnnotations" Version="10.0.10" />
+      <PackageReference Include="Microsoft.Extensions.Options.DataAnnotations" Version="10.0.11" />
       <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.22.0" />
       <PackageReference Include="Scrutor" Version="7.0.0" />
       <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.22.0" />
