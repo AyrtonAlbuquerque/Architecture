@@ -26,8 +26,9 @@
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.22.0" />
-        <PackageReference Include="QuestPDF" Version="2026.7.3" />
+        <PackageReference Include="QuestPDF" Version="2026.8.0" />
         <PackageReference Include="Refit.HttpClientFactory" Version="15.2.0" />
+        <PackageReference Include="Refit.Reflection" Version="15.2.0" />
         <PackageReference Include="Scrutor.AspNetCore" Version="3.3.0" />
         <PackageReference Include="Serilog.AspNetCore" Version="10.0.0" />
         <PackageReference Include="Serilog.Sinks.EventLog" Version="4.0.0" />
