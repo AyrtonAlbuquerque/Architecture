@@ -25,10 +25,10 @@
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.12" />
-      <PackageReference Include="QuestPDF" Version="2026.9.0" />
-      <PackageReference Include="Refit" Version="15.2.0" />
-      <PackageReference Include="Refit.HttpClientFactory" Version="15.2.0" />
-      <PackageReference Include="Refit.Reflection" Version="15.2.0" />
+      <PackageReference Include="QuestPDF" Version="2026.9.1" />
+      <PackageReference Include="Refit" Version="16.1.0" />
+      <PackageReference Include="Refit.HttpClientFactory" Version="16.1.0" />
+      <PackageReference Include="Refit.Reflection" Version="16.1.0" />
       <PackageReference Include="Scrutor" Version="7.0.0" />
     </ItemGroup>
 
