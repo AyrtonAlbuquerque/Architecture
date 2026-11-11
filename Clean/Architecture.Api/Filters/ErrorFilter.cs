@@ -16,7 +16,7 @@ namespace Architecture.Api.Filters
                     operation.Responses[statusCode.ToString()] = new OpenApiResponse
                     {
                         Description = ReasonPhrases.GetReasonPhrase(statusCode),
-                        Content = new Dictionary<string, OpenApiMediaType>()
+                        Content = new Dictionary<string, IOpenApiMediaType>()
                         {
                             ["application/json"] = new OpenApiMediaType
                             {

@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net10.0</TargetFramework>
+        <TargetFramework>net11.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <Configurations>Debug;Release;Stage</Configurations>
         <Platforms>AnyCPU</Platforms>
-        <LangVersion>14</LangVersion>
+        <LangVersion>15</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
@@ -18,11 +18,11 @@
       <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.2.0" />
       <PackageReference Include="Mapster" Version="10.0.14" />
       <PackageReference Include="MediatR" Version="14.3.0" />
-      <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.3.13" />
-      <PackageReference Include="Microsoft.Extensions.Configuration" Version="10.0.14" />
-      <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.14" />
-      <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="10.0.14" />
-      <PackageReference Include="Microsoft.Extensions.Options.DataAnnotations" Version="10.0.14" />
+      <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.3.14" />
+      <PackageReference Include="Microsoft.Extensions.Configuration" Version="11.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="11.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="11.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Options.DataAnnotations" Version="11.0.0" />
       <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.23.0" />
       <PackageReference Include="Scrutor" Version="7.0.0" />
       <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.23.0" />
