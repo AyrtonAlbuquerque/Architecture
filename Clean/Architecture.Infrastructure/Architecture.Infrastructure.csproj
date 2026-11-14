@@ -25,7 +25,7 @@
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="11.0.0" />
-      <PackageReference Include="QuestPDF" Version="2026.9.1" />
+      <PackageReference Include="QuestPDF" Version="2026.9.2" />
       <PackageReference Include="Refit" Version="16.4.0" />
       <PackageReference Include="Refit.HttpClientFactory" Version="16.4.0" />
       <PackageReference Include="Refit.Reflection" Version="16.4.0" />
